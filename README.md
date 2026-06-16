@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DiagnostIQ
 
-## Getting Started
+**Autonomous radiology reporting — product showcase.**
 
-First, run the development server:
+DiagnostIQ is a four-stage AI pipeline that reads a chest radiograph the way a
+clinician does: it classifies the abnormality, localizes the affected region,
+generates a structured report, and has a council of agents verify it before
+sign-off. This repository is the marketing / research showcase site for that
+system.
+
+🔗 **Live:** https://syed-nazmus-sakib.github.io/DiagnostIQ
+
+---
+
+## The pipeline
+
+| Stage | Model | What it does |
+|-------|-------|--------------|
+| 1 · Classification | DenseNet-121 | Multi-label finding detection over 14 pathologies |
+| 2 · Region Detection | MedSAM (ViT-B) | Promptable segmentation of the affected region |
+| 3 · Report Generation | RadLM-7B | Structured RadLex report grounded in the detected region |
+| 4 · Verification | 3-agent council | Debate + adjudication to consensus before sign-off |
+
+## Sections
+
+Hero · interactive 4-stage **Pipeline** (cycles three real radiographs) ·
+**Architecture** schematic · **Report explorer** with per-section provenance ·
+**Benchmarks** · request-access + safety disclaimer.
+
+## Tech
+
+- **Next.js 16** (App Router) · **TypeScript** · static export
+- Hand-written **CSS Modules** — no UI framework
+- Type: Space Grotesk + JetBrains Mono · "PACS workstation" dark theme
+- Real chest radiographs from Wikimedia Commons (see
+  [`public/xrays/ATTRIBUTION.md`](public/xrays/ATTRIBUTION.md)); all AI overlays
+  are synthetic and illustrative.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build    # static export to ./out
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy
 
-## Learn More
+Pushing to `main` triggers the GitHub Pages workflow
+(`.github/workflows/nextjs.yml`), which builds a static export and publishes it.
+Because the site is served from a project subpath, the workflow passes
+`NEXT_PUBLIC_BASE_PATH` (the repo's base path) into the build; `next.config.ts`
+applies it as `basePath` / `assetPrefix`, and `lib/basePath.ts` (`asset()`)
+prefixes references to files in `/public`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> ⚠️ **Research preview — not for diagnostic use.** Not a medical device; not
+> FDA-cleared or CE-marked. Outputs require review and sign-off by a licensed
+> radiologist.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 DiagnostIQ — All rights reserved by **Cortex AI Lab**, Robotics and
+Mechatronics Engineering, University of Dhaka.

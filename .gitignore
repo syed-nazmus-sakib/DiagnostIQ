@@ -43,3 +43,9 @@ next-env.d.ts
 # local artifacts
 .playwright-mcp/
 *.local.png
+# screenshots dropped at repo root during dev
+/*.png
+
+# agent / assistant config
+CLAUDE.md
+.claude/

@@ -1,0 +1,258 @@
+.wrap {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 5vw, 70px);
+  align-items: end;
+  margin-bottom: 56px;
+}
+.title {
+  margin-top: 18px;
+  font-size: clamp(34px, 4.6vw, 60px);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+.intro {
+  color: var(--ink-dim);
+  font-size: 15.5px;
+  line-height: 1.7;
+  max-width: 470px;
+}
+
+/* headline metrics */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+.metric {
+  padding: 26px 26px 24px;
+  border-right: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface), var(--bg-deep));
+}
+.metric:last-child {
+  border-right: 0;
+}
+.metricV {
+  font-size: clamp(36px, 4.4vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.metricDown {
+  color: var(--ink);
+}
+.metricLabel {
+  display: block;
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+.metricSub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+.arrow {
+  color: var(--accent);
+  font-size: 8px;
+}
+.metricDown ~ .metricLabel {
+  color: var(--ink);
+}
+
+/* lower panels */
+.lower {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+}
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--surface), var(--bg-deep));
+  overflow: hidden;
+}
+.panelHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.panelHead h3 {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+.panelHead span {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* coverage grid */
+.cov {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 28px;
+  padding: 20px 22px;
+}
+.cell {
+  display: grid;
+  grid-template-columns: 1fr 64px auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+}
+.cellName {
+  font-size: 12.5px;
+  color: var(--ink-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cellTrack {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cellBar {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  width: 0;
+  transition: width 0.9s var(--ease);
+}
+.cellVal {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* council impact */
+.impact {
+  padding: 22px;
+}
+.impactRow {
+  margin-bottom: 24px;
+}
+.impactLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.impactBars {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.impactBar {
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.impactFillBase,
+.impactFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  transition: width 1s var(--ease);
+}
+.impactFillBase {
+  background: rgba(255, 255, 255, 0.1);
+}
+.impactFill {
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  box-shadow: 0 0 16px -4px var(--accent-glow);
+}
+.impactGood {
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+}
+.impactBar em {
+  position: relative;
+  z-index: 1;
+  margin-left: 11px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--ink);
+}
+.impactBar i {
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: 11px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.impactNote {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.impactNote b {
+  color: var(--accent);
+}
+
+.disclaimer {
+  margin-top: 28px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 940px) {
+  .head,
+  .metrics,
+  .lower {
+    grid-template-columns: 1fr;
+  }
+  .metric {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .metric:last-child {
+    border-bottom: 0;
+  }
+}
+@media (max-width: 560px) {
+  .cov {
+    grid-template-columns: 1fr;
+  }
+}

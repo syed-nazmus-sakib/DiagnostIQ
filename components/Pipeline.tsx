@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CASES, STAGES, type PipelineCase } from "./pipeline.data";
+import { asset } from "@/lib/basePath";
 import styles from "./Pipeline.module.css";
 
 /* ---------- helpers ---------- */
@@ -218,7 +219,7 @@ export default function Pipeline() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 key={c.img}
-                src={c.img}
+                src={asset(c.img)}
                 alt={`${c.view} chest radiograph — ${c.primary}`}
                 className={styles.filmImg}
                 decoding="async"
