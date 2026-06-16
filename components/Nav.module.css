@@ -1,77 +1,94 @@
-.nav {
+/* floating glass dock */
+.dock {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  backdrop-filter: blur(14px) saturate(120%);
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 11, 13, 0.85),
-    rgba(10, 11, 13, 0.4)
-  );
-  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: center;
+  padding: 16px var(--gutter);
+  pointer-events: none;
 }
 
-.inner {
-  height: 64px;
+.nav {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 1040px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  padding: 0 12px 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(43, 38, 34, 0.1);
+  background: rgba(250, 245, 237, 0.55);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 10px 30px -14px rgba(43, 38, 34, 0.25);
+  transition: height 0.35s var(--ease), background 0.35s var(--ease),
+    box-shadow 0.35s var(--ease), max-width 0.45s var(--ease),
+    border-color 0.35s var(--ease);
 }
 
+.scrolled {
+  height: 52px;
+  max-width: 920px;
+  background: rgba(250, 245, 237, 0.82);
+  border-color: rgba(43, 38, 34, 0.14);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 14px 38px -16px rgba(43, 38, 34, 0.32);
+}
+
+/* brand */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   color: var(--ink);
 }
-
 .mark {
   color: var(--accent);
   display: grid;
   place-items: center;
-  filter: drop-shadow(0 0 6px var(--accent-glow));
 }
-
 .wordmark {
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15.5px;
   letter-spacing: -0.02em;
 }
-
 .iq {
   color: var(--accent);
 }
 
+/* links */
 .links {
   display: flex;
-  gap: 30px;
+  gap: 26px;
   font-family: var(--font-mono);
   font-size: 12.5px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--muted);
 }
-
 .links a {
   position: relative;
   padding-block: 4px;
   transition: color 0.2s var(--ease);
 }
-
 .links a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -2px;
+  bottom: -1px;
   width: 0;
-  height: 1px;
+  height: 1.5px;
+  border-radius: 2px;
   background: var(--accent);
   transition: width 0.25s var(--ease);
 }
-
 .links a:hover {
   color: var(--ink);
 }
@@ -79,23 +96,22 @@
   width: 100%;
 }
 
+/* right cluster */
 .right {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
 }
-
 .status {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--muted);
   text-transform: lowercase;
 }
-
 .dot {
   width: 7px;
   height: 7px;
@@ -104,41 +120,43 @@
   box-shadow: 0 0 0 0 var(--accent-glow);
   animation: pulse 2.4s var(--ease) infinite;
 }
-
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 var(--accent-glow);
   }
   70% {
-    box-shadow: 0 0 0 7px rgba(25, 227, 196, 0);
+    box-shadow: 0 0 0 7px rgba(14, 140, 121, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(25, 227, 196, 0);
+    box-shadow: 0 0 0 0 rgba(14, 140, 121, 0);
   }
 }
-
 .cta {
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.03em;
-  color: var(--bg-deep);
+  letter-spacing: 0.02em;
+  color: #fff;
   background: var(--accent);
-  padding: 8px 16px;
-  border-radius: var(--radius);
+  padding: 9px 16px;
+  border-radius: 999px;
   font-weight: 500;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease);
 }
-
 .cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px -6px var(--accent-glow);
+  background: var(--accent-dim);
+  box-shadow: 0 8px 22px -8px var(--accent-glow);
 }
 
 @media (max-width: 860px) {
-  .links {
-    display: none;
-  }
+  .links,
   .status {
     display: none;
+  }
+  .nav,
+  .scrolled {
+    max-width: 560px;
+    height: 54px;
   }
 }

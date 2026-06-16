@@ -1,30 +1,31 @@
 /* ============================================================
    DiagnostIQ — design system
-   PACS workstation / radiology reading-room aesthetic
+   Milk-tea light chrome + dark "film" insets (.darkScope)
    ============================================================ */
 
 :root {
-  /* surface */
-  --bg: #0a0b0d;
-  --bg-deep: #070809;
-  --surface: #101316;
-  --surface-2: #151a1e;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
+  /* surface — warm milk-tea */
+  --bg: #efe7da;
+  --bg-deep: #e5dac9;
+  --surface: #f7f1e8;
+  --surface-2: #fbf7f0;
+  --line: rgba(43, 38, 34, 0.12);
+  --line-strong: rgba(43, 38, 34, 0.22);
+  --track: rgba(43, 38, 34, 0.08);
 
-  /* ink */
-  --ink: #e8ebed;
-  --ink-dim: #aab0b5;
-  --muted: #7e868c;
-  --faint: #4a5157;
+  /* ink — warm near-black */
+  --ink: #2a2622;
+  --ink-dim: #574e43;
+  --muted: #8a7f6f;
+  --faint: #ada290;
 
-  /* signal */
-  --accent: #19e3c4;
-  --accent-dim: #0e8c79;
-  --accent-glow: rgba(25, 227, 196, 0.45);
-  --warn: #f5a623;
-  --warn-glow: rgba(245, 166, 35, 0.4);
-  --crit: #ff5d5d;
+  /* signal — deep teal + clay */
+  --accent: #0e8c79;
+  --accent-dim: #0a6e5f;
+  --accent-glow: rgba(14, 140, 121, 0.28);
+  --warn: #b96a2e;
+  --warn-glow: rgba(185, 106, 46, 0.3);
+  --crit: #be3a2b;
 
   /* type */
   --font-display: "Space Grotesk", system-ui, sans-serif;
@@ -36,6 +37,34 @@
   --radius: 4px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------
+   dark film scope — restores the PACS phosphor palette for any
+   region wrapping radiographs / viewers. Apply class="darkScope".
+   ------------------------------------------------------------ */
+.darkScope {
+  --bg: #0a0b0d;
+  --bg-deep: #070809;
+  --surface: #101316;
+  --surface-2: #151a1e;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --track: rgba(255, 255, 255, 0.08);
+
+  --ink: #e8ebed;
+  --ink-dim: #aab0b5;
+  --muted: #7e868c;
+  --faint: #4a5157;
+
+  --accent: #19e3c4;
+  --accent-dim: #0e8c79;
+  --accent-glow: rgba(25, 227, 196, 0.45);
+  --warn: #f5a623;
+  --warn-glow: rgba(245, 166, 35, 0.4);
+  --crit: #ff5d5d;
+
+  color: var(--ink);
 }
 
 *,
@@ -65,14 +94,14 @@ body {
   position: relative;
 }
 
-/* reading-room background: fine grid + radial vignette + faint scan glow */
+/* warm paper background: soft grid + cream highlights + faint teal */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
-  background-image: linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(43, 38, 34, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43, 38, 34, 0.045) 1px, transparent 1px);
   background-size: 56px 56px;
   -webkit-mask-image: radial-gradient(
     ellipse 90% 70% at 50% 0%,
@@ -80,7 +109,7 @@ body::before {
     transparent 80%
   );
   mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 0%, transparent 80%);
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 body::after {
@@ -89,17 +118,21 @@ body::after {
   inset: 0;
   z-index: -2;
   background: radial-gradient(
-      900px 500px at 78% -5%,
-      rgba(25, 227, 196, 0.1),
+      1000px 620px at 82% -8%,
+      rgba(14, 140, 121, 0.1),
       transparent 60%
     ),
-    radial-gradient(700px 500px at 5% 8%, rgba(25, 227, 196, 0.05), transparent 55%);
+    radial-gradient(
+      1100px 700px at 8% -2%,
+      rgba(255, 252, 245, 0.85),
+      transparent 62%
+    );
   pointer-events: none;
 }
 
 ::selection {
   background: var(--accent);
-  color: var(--bg-deep);
+  color: #fff;
 }
 
 a {

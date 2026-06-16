@@ -146,7 +146,11 @@ export default function Pipeline() {
   const consensus = stage === 3 && agentStep >= c.debate.length;
 
   return (
-    <section id="pipeline" className={`section ${styles.wrap}`} ref={sectionRef}>
+    <section
+      id="pipeline"
+      className={`section ${styles.wrap} darkScope`}
+      ref={sectionRef}
+    >
       <div className="container">
         {/* header */}
         <div className={styles.head}>

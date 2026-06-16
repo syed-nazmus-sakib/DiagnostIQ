@@ -1,5 +1,9 @@
 .wrap {
   position: relative;
+  background: var(--bg);
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  box-shadow: 0 40px 90px -60px rgba(43, 38, 34, 0.5);
 }
 
 /* ---------------- header ---------------- */

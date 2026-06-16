@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from "./Nav.module.css";
 
 const links = [
@@ -8,12 +11,21 @@ const links = [
 ];
 
 export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className={styles.nav}>
-      <div className={`container ${styles.inner}`}>
+    <div className={styles.dock}>
+      <header className={`${styles.nav} ${scrolled ? styles.scrolled : ""}`}>
         <a href="#top" className={styles.brand} aria-label="DiagnostIQ home">
           <span className={styles.mark} aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22">
+            <svg viewBox="0 0 24 24" width="20" height="20">
               <circle
                 cx="12"
                 cy="12"
@@ -27,7 +39,7 @@ export default function Nav() {
                 d="M3 12 H8 L10 6 L14 18 L16 12 H21"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.6"
+                strokeWidth="1.7"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
@@ -49,13 +61,13 @@ export default function Nav() {
         <div className={styles.right}>
           <span className={styles.status}>
             <span className={styles.dot} aria-hidden="true" />
-            system: online
+            online
           </span>
           <a href="#access" className={styles.cta}>
             Request access
           </a>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
