@@ -1,43 +1,40 @@
+"use client";
+
 import XrayScan from "./XrayScan";
+import { useLocale } from "./LocaleProvider";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
+  const { t } = useLocale();
+  const h = t.hero;
+
   return (
     <section className={styles.hero} id="top">
-      {/* lab masthead rule */}
       <div className={`container ${styles.masthead}`}>
-        <span>Cortex AI Lab · Robotics &amp; Mechatronics Eng.</span>
-        <span>Chest radiography · v2.4</span>
+        <span>{h.mastheadLeft}</span>
+        <span>{h.mastheadRight}</span>
       </div>
 
       <div className={`container ${styles.grid}`}>
-        {/* ---------------- left: statement ---------------- */}
         <div className={styles.copy}>
           <span className={styles.chip}>
             <span className={styles.chipDotSm} aria-hidden="true" />
-            AI radiology · research preview
+            {h.chip}
           </span>
 
           <h1 className={styles.title}>
-            Autonomous
+            {h.titleLine1}
             <br />
-            radiology
+            {h.titleLine2}
             <br />
-            <span className={styles.accent}>reporting.</span>
+            <span className={styles.accent}>{h.titleAccent}</span>
           </h1>
 
-          <p className={styles.lede}>
-            One pipeline reads a chest radiograph the way a clinician does —
-            classify the finding, segment the region, draft the report, and let a
-            council of agents verify it before sign-off.
-          </p>
-          <p className={styles.bangla} lang="bn">
-            বাংলাদেশের জন্য — দ্রুত, নির্ভরযোগ্য, বিশেষজ্ঞ-নিরীক্ষিত রিপোর্ট।
-          </p>
+          <p className={styles.lede}>{h.lede}</p>
 
           <div className={styles.actions}>
             <a href="#pipeline" className={styles.primary}>
-              See the pipeline
+              {h.ctaPrimary}
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
                 <path
                   d="M2 7h9M7 3l4 4-4 4"
@@ -50,12 +47,11 @@ export default function Hero() {
               </svg>
             </a>
             <a href="#access" className={styles.ghost}>
-              Request access
+              {h.ctaGhost}
             </a>
           </div>
         </div>
 
-        {/* ---------------- right: film + floating outputs ---------------- */}
         <div className={styles.stage}>
           <span className={styles.ring} aria-hidden="true" />
 
@@ -113,13 +109,12 @@ export default function Hero() {
 
             <div className={styles.viewerFooter}>
               <span className={styles.live}>
-                <span className={styles.liveDot} /> interactive demo
+                <span className={styles.liveDot} /> {h.demoLabel}
               </span>
-              <span>pipeline 4 / 4 · preview</span>
+              <span>{h.demoMeta}</span>
             </div>
           </div>
 
-          {/* floating output cards (light, crossing the boundary) */}
           <aside className={`${styles.card} ${styles.clsCard}`}>
             <span className={styles.cardTag}>01 · classify</span>
             <div className={styles.bar}>
@@ -142,42 +137,37 @@ export default function Hero() {
           </aside>
 
           <aside className={`${styles.card} ${styles.repCard}`}>
-            <span className={styles.signed}>✓ signed</span>
-            <p className={styles.snippet}>
-              Large left pneumothorax with early mediastinal shift.
-            </p>
-            <span className={styles.cardMeta}>
-              council 0.97 · radlm-7b
-            </span>
+            <span className={styles.signed}>{h.cardSigned}</span>
+            <p className={styles.snippet}>{h.cardSnippet}</p>
+            <span className={styles.cardMeta}>council 0.97 · radlm-7b</span>
           </aside>
         </div>
       </div>
 
-      {/* ---------------- stats strip ---------------- */}
       <div className={`container ${styles.statsWrap}`}>
         <dl className={styles.stats}>
           <div>
-            <dt>Findings</dt>
+            <dt>{h.stats.findings}</dt>
             <dd>
-              14<span>pathology classes</span>
+              14<span>{h.stats.findingsSub}</span>
             </dd>
           </div>
           <div>
-            <dt>Mean Dice</dt>
+            <dt>{h.stats.dice}</dt>
             <dd>
-              0.89<span>region segmentation</span>
+              0.89<span>{h.stats.diceSub}</span>
             </dd>
           </div>
           <div>
-            <dt>RadGraph-F1</dt>
+            <dt>{h.stats.radgraph}</dt>
             <dd>
-              0.48<span>report factuality</span>
+              0.48<span>{h.stats.radgraphSub}</span>
             </dd>
           </div>
           <div>
-            <dt>Latency</dt>
+            <dt>{h.stats.latency}</dt>
             <dd>
-              3.2<span>sec / study</span>
+              3.2<span>{h.stats.latencySub}</span>
             </dd>
           </div>
         </dl>

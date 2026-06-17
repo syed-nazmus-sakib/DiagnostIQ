@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CASES } from "./pipeline.data";
+import { useLocale, LangToggle } from "./LocaleProvider";
 import styles from "./ReportExplorer.module.css";
 
 function Highlight({ text, region }: { text: string; region: string }) {
@@ -21,32 +22,30 @@ function Highlight({ text, region }: { text: string; region: string }) {
 }
 
 export default function ReportExplorer() {
+  const { locale, t } = useLocale();
   const [idx, setIdx] = useState(0);
   const c = CASES[idx];
   const m = c.patient;
+  const bn = locale === "bn";
+  const report = bn ? c.reportBn : c.report;
+  const region = bn ? c.seg.regionBn : c.seg.region;
 
   return (
     <section id="reports" className={`section ${styles.wrap}`}>
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">05 — output</span>
+            <span className="section-index">{t.reports.section}</span>
             <h2 className={styles.title}>
-              Every line,
+              {t.reports.titleLine1}
               <br />
-              traced to a model.
+              {t.reports.titleLine2}
             </h2>
           </div>
-          <p className={styles.intro}>
-            Reports aren&apos;t free-text guesses. Each section is bound to the
-            component that produced it — header from DICOM, findings from the
-            classifier and segmenter, impression from the council. Pick a study
-            to inspect the provenance.
-          </p>
+          <p className={styles.intro}>{t.reports.intro}</p>
         </div>
 
         <div className={styles.grid}>
-          {/* selector */}
           <div className={styles.picker}>
             {CASES.map((cc, i) => (
               <button
@@ -72,68 +71,73 @@ export default function ReportExplorer() {
             ))}
           </div>
 
-          {/* report document */}
-          <article className={styles.doc} key={c.id}>
+          <article className={styles.doc} key={`${c.id}-${locale}`}>
             <header className={styles.docHead}>
               <div className={styles.docTitle}>
                 <span className={styles.docMark}>◳</span>
                 <div>
-                  <strong>Radiology report</strong>
-                  <span>DiagnostIQ · autonomous draft</span>
+                  <strong>{t.reports.docTitle}</strong>
+                  <span>{t.reports.docSub}</span>
                 </div>
               </div>
-              <span className={styles.signed}>
-                <span className={styles.signedDot} /> signed
-              </span>
+              <div className={styles.docActions}>
+                <span className={styles.langLabel}>{t.reports.langToggle}</span>
+                <LangToggle className="langToggle" compact />
+                <span className={styles.signed}>
+                  <span className={styles.signedDot} /> {t.reports.signed}
+                </span>
+              </div>
             </header>
 
             <dl className={styles.patient}>
               <div>
-                <dt>study</dt>
+                <dt>{t.reports.study}</dt>
                 <dd>{c.study}</dd>
               </div>
               <div>
-                <dt>patient</dt>
+                <dt>{t.reports.patient}</dt>
                 <dd>
                   {`{anon}`} · {m.sex}/{m.age}
                 </dd>
               </div>
               <div>
-                <dt>exam</dt>
-                <dd>{c.view} chest</dd>
+                <dt>{t.reports.exam}</dt>
+                <dd>
+                  {c.view} chest
+                </dd>
               </div>
               <div>
-                <dt>date</dt>
+                <dt>{t.reports.date}</dt>
                 <dd>{m.date}</dd>
               </div>
             </dl>
 
-            <Section src="DICOM 0008/0018" label="Technique">
-              {c.report.technique}
+            <Section src="DICOM 0008/0018" label={t.reports.technique}>
+              {report.technique}
             </Section>
-            <Section src="PACS prior" label="Comparison">
-              {c.report.comparison}
+            <Section src="PACS prior" label={t.reports.comparison}>
+              {report.comparison}
             </Section>
-            <Section src="DenseNet-121 ⊕ MedSAM" label="Findings" accent>
-              <ul className={styles.findings}>
-                {c.report.findings.map((f, i) => (
+            <Section src="DenseNet-121 ⊕ MedSAM" label={t.reports.findings} accent>
+              <ul className={styles.findings} lang={bn ? "bn" : "en"}>
+                {report.findings.map((f, i) => (
                   <li key={i}>
-                    <Highlight text={f} region={c.seg.region} />
+                    <Highlight text={f} region={region} />
                   </li>
                 ))}
               </ul>
             </Section>
-            <Section src="3-agent council" label="Impression" accent>
-              <ol className={styles.impression}>
-                {c.report.impression.map((f, i) => (
-                  <li key={i}>{f.replace("[REGION]", c.seg.region)}</li>
+            <Section src="3-agent council" label={t.reports.impression} accent>
+              <ol className={styles.impression} lang={bn ? "bn" : "en"}>
+                {report.impression.map((f, i) => (
+                  <li key={i}>{f.replace("[REGION]", region)}</li>
                 ))}
               </ol>
             </Section>
 
             <footer className={styles.docFoot}>
               <span>
-                council confidence{" "}
+                {t.reports.confidence}{" "}
                 <b className={styles.up}>{c.confidence.after.toFixed(2)}</b>
               </span>
               <span>densenet-121 · medsam · radlm-7b · v2.4</span>

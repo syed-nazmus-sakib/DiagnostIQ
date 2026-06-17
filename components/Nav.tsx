@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale, LangToggle } from "./LocaleProvider";
 import styles from "./Nav.module.css";
 
-const links = [
-  { href: "#why-bd", label: "Bangladesh" },
-  { href: "#pipeline", label: "Pipeline" },
-  { href: "#reports", label: "Reports" },
-  { href: "#team", label: "Team" },
-];
-
 export default function Nav() {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
+
+  const links = [
+    { href: "#why-bd", label: t.nav.bangladesh },
+    { href: "#journey", label: t.nav.journey },
+    { href: "#pipeline", label: t.nav.pipeline },
+    { href: "#reports", label: t.nav.reports },
+    { href: "#impact", label: t.nav.impact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -59,12 +62,13 @@ export default function Nav() {
         </nav>
 
         <div className={styles.right}>
+          <LangToggle compact />
           <span className={styles.status}>
             <span className={styles.dot} aria-hidden="true" />
-            research preview
+            {t.nav.status}
           </span>
           <a href="#access" className={styles.cta}>
-            Request access
+            {t.nav.cta}
           </a>
         </div>
       </header>

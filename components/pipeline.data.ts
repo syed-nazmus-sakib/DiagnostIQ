@@ -32,8 +32,10 @@ export type PipelineCase = {
     points: [number, number][];
     /** human label for the region */
     region: string;
+    regionBn: string;
   };
   report: { technique: string; comparison: string; findings: string[]; impression: string[] };
+  reportBn: { technique: string; comparison: string; findings: string[]; impression: string[] };
   debate: AgentMsg[];
   confidence: { before: number; after: number };
 };
@@ -57,6 +59,7 @@ export const CASES: PipelineCase[] = [
       conf: 0.92,
       areaCm2: 168,
       region: "Left hemithorax",
+      regionBn: "বাম হিমথোরাক্স",
       poly: "236,120 292,104 344,138 360,214 338,300 292,322 250,276 240,196",
       points: [
         [300, 168],
@@ -74,6 +77,19 @@ export const CASES: PipelineCase[] = [
       impression: [
         "Large left pneumothorax with early mediastinal shift.",
         "Findings conveyed for urgent decompression.",
+      ],
+    },
+    reportBn: {
+      technique: "একক AP সুপাইন পোর্টেবল বুক এক্স-রেডিওগ্রাফ।",
+      comparison: "পূর্ববর্তী পরীক্ষার তুলনা উপলব্ধ নয়।",
+      findings: [
+        "[REGION]-এ দৃশ্যমান visceral pleural line সহ বাম পাশের বড় নিমোথোরাক্স; পার্শ্বীয় ফুসফুস চিহ্ন lateral দিকে অনুপস্থিত।",
+        "মাঝ বরাবর গঠনগুলো সামান্য ডান দিকে সরে গেছে।",
+        "ডান internal jugular central venous catheter, catheter tip SVC-এর উপর projecting।",
+      ],
+      impression: [
+        "প্রাথমিক mediastinal shift সহ বাম পাশের বড় নিমোথোরাক্স।",
+        "জরুরি decompression-এর জন্য findings প্রেরণ করা হয়েছে।",
       ],
     },
     debate: [
@@ -103,6 +119,7 @@ export const CASES: PipelineCase[] = [
       conf: 0.89,
       areaCm2: 214,
       region: "Cardiac silhouette",
+      regionBn: "হৃদয়ের silhouette",
       poly: "150,250 232,238 296,286 300,372 250,420 182,414 150,346 150,288",
       points: [
         [228, 330],
@@ -120,6 +137,19 @@ export const CASES: PipelineCase[] = [
       impression: [
         "Cardiomegaly with pulmonary venous congestion.",
         "Findings consistent with decompensated heart failure.",
+      ],
+    },
+    reportBn: {
+      technique: "PA upright বুক এক্স-রেডিওগ্রাফ।",
+      comparison: "study 0xB6E0-এর তুলনায় cardiac silhouette বড় হয়েছে।",
+      findings: [
+        "[REGION] জড়িত enlarged cardiac silhouette, cardiothoracic ratio 0.61।",
+        "Kerley B lines ও vascular cephalization সহ interstitial pulmonary edema।",
+        "Costophrenic angles blunted সহ ছোট bilateral pleural effusion।",
+      ],
+      impression: [
+        "Pulmonary venous congestion সহ cardiomegaly।",
+        "Decompensated heart failure-এর সাথে সামঞ্জস্যপূর্ণ findings।",
       ],
     },
     debate: [
@@ -149,6 +179,7 @@ export const CASES: PipelineCase[] = [
       conf: 0.9,
       areaCm2: 96,
       region: "Posterior costophrenic recess",
+      regionBn: "পৃষ্ঠীয় costophrenic recess",
       poly: "150,372 286,356 348,392 350,452 300,468 188,466 150,430",
       points: [
         [262, 412],
@@ -166,6 +197,19 @@ export const CASES: PipelineCase[] = [
       impression: [
         "Moderate posterior pleural effusion.",
         "Correlate clinically; consider thoracentesis.",
+      ],
+    },
+    reportBn: {
+      technique: "বাম lateral বুক এক্স-রেডিওগ্রাফ।",
+      comparison: "পূর্ববর্তী পরীক্ষার তুলনা উপলব্ধ নয়।",
+      findings: [
+        "Posterior meniscus সহ [REGION] blunted, layering pleural fluid।",
+        "Lung base-এ adjacent compressive atelectasis।",
+        "Focal consolidation বা pneumothorax নেই।",
+      ],
+      impression: [
+        "মধ্যম posterior pleural effusion।",
+        "Clinically correlate; thoracentesis consider করুন।",
       ],
     },
     debate: [

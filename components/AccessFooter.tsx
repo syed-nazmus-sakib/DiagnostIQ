@@ -2,17 +2,16 @@
 
 import { useState } from "react";
 import { asset } from "@/lib/basePath";
-import {
-  buildMailtoUrl,
-  FORM_ENDPOINT,
-  INTENT_LABELS,
-  type InquiryIntent,
-} from "@/lib/contact";
+import { buildMailtoUrl, FORM_ENDPOINT, type InquiryIntent } from "@/lib/contact";
+import { useLocale } from "./LocaleProvider";
 import styles from "./AccessFooter.module.css";
 
 const INTENTS: InquiryIntent[] = ["hospital", "investor", "research"];
 
 export default function AccessFooter() {
+  const { t } = useLocale();
+  const a = t.access;
+
   const [intent, setIntent] = useState<InquiryIntent>("hospital");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,6 +30,7 @@ export default function AccessFooter() {
       return;
     }
 
+    const intentLabel = t.intents[intent];
     const fields = { name, email, org, message };
     setSubmitting(true);
 
@@ -43,7 +43,7 @@ export default function AccessFooter() {
             Accept: "application/json",
           },
           body: JSON.stringify({
-            intent: INTENT_LABELS[intent],
+            intent: intentLabel,
             name,
             email,
             organization: org,
@@ -52,7 +52,7 @@ export default function AccessFooter() {
         });
         if (!res.ok) throw new Error("Form submission failed");
       } else {
-        window.location.href = buildMailtoUrl(intent, fields);
+        window.location.href = buildMailtoUrl(intentLabel, fields);
         setSubmitting(false);
         return;
       }
@@ -69,15 +69,9 @@ export default function AccessFooter() {
       <section id="access" className={`section ${styles.access}`}>
         <div className={`container ${styles.grid}`}>
           <div className={styles.cta}>
-            <span className="eyebrow">08 — contact</span>
-            <h2 className={styles.title}>
-              Partner with us in Bangladesh.
-            </h2>
-            <p className={styles.sub}>
-              Hospitals, investors, and researchers — tell us how you&apos;d like
-              to work with DiagnostIQ. We onboard design partners in small
-              cohorts and deploy entirely inside your environment.
-            </p>
+            <span className="eyebrow">{a.section}</span>
+            <h2 className={styles.title}>{a.title}</h2>
+            <p className={styles.sub}>{a.sub}</p>
 
             <div className={styles.intents} role="tablist" aria-label="Inquiry type">
               {INTENTS.map((key) => (
@@ -89,7 +83,7 @@ export default function AccessFooter() {
                   className={`${styles.intent} ${intent === key ? styles.intentOn : ""}`}
                   onClick={() => setIntent(key)}
                 >
-                  {INTENT_LABELS[key]}
+                  {t.intents[key]}
                 </button>
               ))}
             </div>
@@ -98,8 +92,10 @@ export default function AccessFooter() {
               <div className={styles.confirm} role="status">
                 <span className={styles.confirmCheck} aria-hidden="true">✓</span>
                 <div>
-                  <strong>Request received.</strong>
-                  <span>We&apos;ll reach out to {email} shortly.</span>
+                  <strong>{a.confirmTitle}</strong>
+                  <span>
+                    {a.confirmSub} ({email})
+                  </span>
                 </div>
               </div>
             ) : (
@@ -108,37 +104,37 @@ export default function AccessFooter() {
                   <input
                     type="text"
                     required
-                    placeholder="Your name"
+                    placeholder={a.namePh}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className={styles.input}
-                    aria-label="Your name"
+                    aria-label={a.namePh}
                   />
                   <input
                     type="email"
                     required
-                    placeholder="name@hospital.org"
+                    placeholder={a.emailPh}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className={styles.input}
-                    aria-label="Work email"
+                    aria-label={a.emailPh}
                   />
                 </div>
                 <input
                   type="text"
-                  placeholder="Organization (hospital, fund, university…)"
+                  placeholder={a.orgPh}
                   value={org}
                   onChange={(e) => setOrg(e.target.value)}
                   className={styles.input}
-                  aria-label="Organization"
+                  aria-label={a.orgPh}
                 />
                 <textarea
-                  placeholder="Tell us about your interest — pilot site, investment, or research…"
+                  placeholder={a.msgPh}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className={styles.textarea}
                   rows={3}
-                  aria-label="Message"
+                  aria-label={a.msgPh}
                 />
                 {error && (
                   <p className={styles.formError} role="alert">
@@ -146,7 +142,7 @@ export default function AccessFooter() {
                   </p>
                 )}
                 <button type="submit" className={styles.submit} disabled={submitting}>
-                  {submitting ? "Sending…" : "Send inquiry"}
+                  {submitting ? a.submitting : a.submit}
                   <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
                     <path
                       d="M2 7h9M7 3l4 4-4 4"
@@ -160,30 +156,24 @@ export default function AccessFooter() {
                 </button>
               </form>
             )}
-            <p className={styles.note}>
-              On-prem deployment · no training on your studies · Bangla reports on
-              roadmap
-            </p>
+            <p className={styles.note}>{a.note}</p>
           </div>
 
           <aside className={styles.safety}>
             <div className={styles.safetyHead}>
               <span className={styles.safetyIcon} aria-hidden="true">⚠</span>
-              <h3>Research preview — not for diagnostic use</h3>
+              <h3>{a.safetyTitle}</h3>
             </div>
-            <p className={styles.safetyBody} lang="bn">
-              গবেষণামূলক প্রদর্শন — রোগ নির্ণয়ের জন্য নয়। প্রতিটি রিপোর্ট
-              লাইসেন্সপ্রাপ্ত রেডিওলজিস্ট-এর সাইন-অফ ছাড়া ব্যবহার করা যাবে না।
-            </p>
-            <p className={styles.safetyBody}>
-              DiagnostIQ is investigational — not FDA-cleared, CE-marked, or
-              DGDA-registered. Every output requires review and sign-off by a
-              licensed radiologist.
-            </p>
+            {a.safetyBn ? (
+              <p className={styles.safetyBody} lang="bn">
+                {a.safetyBn}
+              </p>
+            ) : null}
+            <p className={styles.safetyBody}>{a.safetyEn}</p>
             <ul className={styles.safetyList}>
-              <li>Not a medical device (research preview)</li>
-              <li>Human-in-the-loop sign-off required</li>
-              <li>De-identified data only · no PHI retained</li>
+              {a.safetyList.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </aside>
         </div>
@@ -195,27 +185,30 @@ export default function AccessFooter() {
             <span className={styles.brand}>
               Diagnost<span className={styles.iq}>IQ</span>
             </span>
-            <p>Autonomous radiology reporting for Bangladesh.</p>
-            <p className={styles.footBangla} lang="bn">
-              বাংলাদেশের জন্য স্বয়ংক্রিয় রেডিওলজি রিপোর্টিং
-            </p>
+            <p>{a.footerTagline}</p>
+            {a.footerBangla ? (
+              <p className={styles.footBangla} lang="bn">
+                {a.footerBangla}
+              </p>
+            ) : null}
             <span className={styles.status}>
-              <span className={styles.statusDot} /> research preview
+              <span className={styles.statusDot} /> {a.footerStatus}
             </span>
           </div>
 
           <nav className={styles.footNav} aria-label="Footer">
             <span className={styles.footCol}>
               <span className={styles.footColHead}>Product</span>
-              <a href="#why-bd">Why Bangladesh</a>
-              <a href="#pipeline">Pipeline</a>
-              <a href="#architecture">Architecture</a>
-              <a href="#reports">Reports</a>
+              <a href="#why-bd">{t.nav.bangladesh}</a>
+              <a href="#journey">{t.nav.journey}</a>
+              <a href="#pipeline">{t.nav.pipeline}</a>
+              <a href="#reports">{t.nav.reports}</a>
+              <a href="#impact">{t.nav.impact}</a>
             </span>
             <span className={styles.footCol}>
               <span className={styles.footColHead}>Company</span>
-              <a href="#team">Team &amp; roadmap</a>
-              <a href="#access">Contact</a>
+              <a href="#team">{t.nav.team}</a>
+              <a href="#access">{t.nav.cta}</a>
               <a href="#top">Overview</a>
               <a href={asset("/xrays/ATTRIBUTION.md")}>Image credits</a>
             </span>

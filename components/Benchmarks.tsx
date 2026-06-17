@@ -96,7 +96,7 @@ export default function Benchmarks() {
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">06 — research metrics</span>
+            <span className="section-index">07 — research metrics</span>
             <h2 className={styles.title}>
               Targets,
               <br />

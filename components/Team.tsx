@@ -62,7 +62,7 @@ export default function Team() {
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">07 — team &amp; path</span>
+            <span className="section-index">09 — team &amp; path</span>
             <h2 className={styles.title}>
               University-born.
               <br />

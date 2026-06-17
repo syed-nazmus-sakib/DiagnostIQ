@@ -13,13 +13,13 @@ export const INTENT_LABELS: Record<InquiryIntent, string> = {
 };
 
 export function buildMailtoUrl(
-  intent: InquiryIntent,
+  intentLabel: string,
   fields: { name: string; email: string; org: string; message: string }
 ) {
-  const subject = encodeURIComponent(`DiagnostIQ — ${INTENT_LABELS[intent]}`);
+  const subject = encodeURIComponent(`DiagnostIQ — ${intentLabel}`);
   const body = encodeURIComponent(
     [
-      `Intent: ${INTENT_LABELS[intent]}`,
+      `Intent: ${intentLabel}`,
       `Name: ${fields.name}`,
       `Email: ${fields.email}`,
       `Organization: ${fields.org || "—"}`,

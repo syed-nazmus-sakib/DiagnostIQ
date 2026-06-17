@@ -217,6 +217,34 @@ h3 {
   outline-offset: 3px;
 }
 
+/* ---------- language toggle (EN / বাংলা) ---------- */
+.langToggle {
+  display: inline-flex;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.langToggle button {
+  border: 0;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 7px 12px;
+  color: var(--muted);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.langToggle button:hover {
+  color: var(--ink);
+}
+.langToggle button.on {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
