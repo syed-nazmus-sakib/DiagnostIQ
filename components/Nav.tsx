@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import styles from "./Nav.module.css";
 
 const links = [
+  { href: "#why-bd", label: "Bangladesh" },
   { href: "#pipeline", label: "Pipeline" },
-  { href: "#architecture", label: "Architecture" },
   { href: "#reports", label: "Reports" },
-  { href: "#benchmarks", label: "Benchmarks" },
+  { href: "#team", label: "Team" },
 ];
 
 export default function Nav() {
@@ -61,7 +61,7 @@ export default function Nav() {
         <div className={styles.right}>
           <span className={styles.status}>
             <span className={styles.dot} aria-hidden="true" />
-            online
+            research preview
           </span>
           <a href="#access" className={styles.cta}>
             Request access

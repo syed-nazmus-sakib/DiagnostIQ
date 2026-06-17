@@ -4,12 +4,6 @@ import { useState } from "react";
 import { CASES } from "./pipeline.data";
 import styles from "./ReportExplorer.module.css";
 
-const META: Record<string, { date: string; sex: string; age: string }> = {
-  "PX-4471": { date: "2026-06-14", sex: "M", age: "34" },
-  "CM-2083": { date: "2026-06-12", sex: "F", age: "71" },
-  "PE-9925": { date: "2026-06-11", sex: "F", age: "58" },
-};
-
 function Highlight({ text, region }: { text: string; region: string }) {
   const filled = text.replace("[REGION]", region);
   if (!filled.includes(region)) return <>{filled}</>;
@@ -29,14 +23,14 @@ function Highlight({ text, region }: { text: string; region: string }) {
 export default function ReportExplorer() {
   const [idx, setIdx] = useState(0);
   const c = CASES[idx];
-  const m = META[c.id];
+  const m = c.patient;
 
   return (
     <section id="reports" className={`section ${styles.wrap}`}>
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">04 — output</span>
+            <span className="section-index">05 — output</span>
             <h2 className={styles.title}>
               Every line,
               <br />

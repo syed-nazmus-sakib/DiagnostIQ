@@ -90,6 +90,15 @@
   max-width: 440px;
 }
 
+.bangla {
+  margin-top: 16px;
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.6;
+  color: var(--accent-dim);
+  font-weight: 500;
+  max-width: 440px;
+}
+
 .actions {
   margin-top: 34px;
   display: flex;

@@ -31,6 +31,9 @@ export default function Hero() {
             classify the finding, segment the region, draft the report, and let a
             council of agents verify it before sign-off.
           </p>
+          <p className={styles.bangla} lang="bn">
+            বাংলাদেশের জন্য — দ্রুত, নির্ভরযোগ্য, বিশেষজ্ঞ-নিরীক্ষিত রিপোর্ট।
+          </p>
 
           <div className={styles.actions}>
             <a href="#pipeline" className={styles.primary}>
@@ -110,9 +113,9 @@ export default function Hero() {
 
             <div className={styles.viewerFooter}>
               <span className={styles.live}>
-                <span className={styles.liveDot} /> inference live
+                <span className={styles.liveDot} /> interactive demo
               </span>
-              <span>pipeline 4 / 4</span>
+              <span>pipeline 4 / 4 · preview</span>
             </div>
           </div>
 

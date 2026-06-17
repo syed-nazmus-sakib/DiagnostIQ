@@ -1,0 +1,211 @@
+.wrap {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 5vw, 70px);
+  align-items: end;
+  margin-bottom: 48px;
+}
+
+.title {
+  margin-top: 18px;
+  font-size: clamp(34px, 4.6vw, 60px);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.intro {
+  color: var(--ink-dim);
+  font-size: 15.5px;
+  line-height: 1.7;
+  max-width: 440px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.card {
+  padding: 22px 20px;
+  background: linear-gradient(180deg, var(--surface), var(--bg-deep));
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.cardRole {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cardName {
+  margin-top: 10px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.cardOrg {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  line-height: 1.45;
+}
+
+.cardFocus {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+.traction {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 56px;
+}
+
+.tractionItem {
+  padding: 18px 20px;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.tractionItem:last-child {
+  border-right: 0;
+}
+
+.tractionK {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tractionV {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.regHead {
+  margin-bottom: 24px;
+}
+
+.regTitle {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.regIntro {
+  margin-top: 8px;
+  font-size: 14.5px;
+  color: var(--ink-dim);
+}
+
+.regSteps {
+  list-style: none;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.regRow {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.regStep {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  padding-top: 2px;
+}
+
+.regTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.regTop h4 {
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.regBadge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.now {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: rgba(14, 140, 121, 0.08);
+}
+
+.planned {
+  color: var(--muted);
+}
+
+.regBody p {
+  margin-top: 8px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+@media (max-width: 940px) {
+  .head,
+  .teamGrid,
+  .traction {
+    grid-template-columns: 1fr;
+  }
+
+  .tractionItem {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tractionItem:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .regRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}

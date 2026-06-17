@@ -98,7 +98,7 @@ export default function Architecture() {
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">03 — architecture</span>
+            <span className="section-index">04 — architecture</span>
             <h2 className={styles.title}>
               The stack
               <br />

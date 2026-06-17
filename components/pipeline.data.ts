@@ -18,6 +18,7 @@ export type PipelineCase = {
   view: "AP" | "PA" | "LAT";
   study: string;
   primary: string;
+  patient: { date: string; sex: string; age: string };
   /** classification logits, highest first */
   findings: Finding[];
   /** segmentation */
@@ -44,6 +45,7 @@ export const CASES: PipelineCase[] = [
     view: "AP",
     study: "0xA39F",
     primary: "Pneumothorax",
+    patient: { date: "2026-06-14", sex: "M", age: "34" },
     findings: [
       { label: "Pneumothorax", p: 0.94 },
       { label: "Pleural effusion", p: 0.22 },
@@ -89,6 +91,7 @@ export const CASES: PipelineCase[] = [
     view: "PA",
     study: "0xB7C1",
     primary: "Cardiomegaly",
+    patient: { date: "2026-06-12", sex: "F", age: "71" },
     findings: [
       { label: "Cardiomegaly", p: 0.91 },
       { label: "Pulmonary edema", p: 0.63 },
@@ -134,6 +137,7 @@ export const CASES: PipelineCase[] = [
     view: "LAT",
     study: "0xC44D",
     primary: "Pleural effusion",
+    patient: { date: "2026-06-11", sex: "F", age: "58" },
     findings: [
       { label: "Pleural effusion", p: 0.88 },
       { label: "Atelectasis", p: 0.31 },

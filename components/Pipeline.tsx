@@ -155,7 +155,7 @@ export default function Pipeline() {
         {/* header */}
         <div className={styles.head}>
           <div>
-            <span className="section-index">02 — the pipeline</span>
+            <span className="section-index">03 — the pipeline</span>
             <h2 className={styles.title}>
               Four models.
               <br />

@@ -14,16 +14,21 @@ const mono = JetBrains_Mono({
   weight: ["400", "500", "700"],
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://syed-nazmus-sakib.github.io/DiagnostIQ";
+
 export const metadata: Metadata = {
-  title: "DiagnostIQ — Autonomous Radiology Reporting",
+  title: "DiagnostIQ — Autonomous Radiology Reporting for Bangladesh",
   description:
-    "DiagnostIQ is a three-stage AI pipeline that classifies abnormalities, segments the affected region, and generates a structured radiology report.",
-  metadataBase: new URL("https://diagnostiq.ai"),
+    "University of Dhaka research preview: a four-stage AI pipeline that classifies chest X-ray findings, segments the affected region, generates a structured report, and verifies it with a multi-agent council before radiologist sign-off.",
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "DiagnostIQ — Autonomous Radiology Reporting",
+    title: "DiagnostIQ — Autonomous Radiology Reporting for Bangladesh",
     description:
-      "Classification → Region Detection → Report Generation. A research-grade radiology reporting pipeline.",
+      "Classification → Region Detection → Report Generation → Multi-Agent Verification. Built at Cortex AI Lab, University of Dhaka.",
     type: "website",
+    locale: "en_BD",
   },
 };
 

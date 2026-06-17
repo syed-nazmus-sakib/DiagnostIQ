@@ -96,18 +96,17 @@ export default function Benchmarks() {
       <div className="container">
         <div className={styles.head}>
           <div>
-            <span className="section-index">05 — benchmarks</span>
+            <span className="section-index">06 — research metrics</span>
             <h2 className={styles.title}>
-              Measured,
+              Targets,
               <br />
-              not claimed.
+              not claims.
             </h2>
           </div>
           <p className={styles.intro}>
-            Held-out evaluation on 11,000 studies against board-certified
-            radiologist reports. Classification on NIH ChestX-ray14, segmentation
-            on hand-traced masks, generation scored with RadGraph entity-relation
-            overlap.
+            Illustrative research targets for the DiagnostIQ stack. Formal
+            validation on a Bangladeshi cohort is planned — figures below are
+            not from a regulatory study.
           </p>
         </div>
 
